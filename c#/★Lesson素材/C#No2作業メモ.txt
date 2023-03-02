@@ -1,0 +1,220 @@
+■条件分岐(if文)
+int a = 10;	//　いろいろな値に変えてみる
+if(a > 0){
+	Console.WriteLine("aは正の数です。");  //  正の数だった場合に実行
+}
+
+■条件分岐(if文)
+string s = "hello"; //　いろいろな値に変えてみる
+if (s.Equals("hello"))
+{
+	Console.WriteLine("sは「Hello」です。");
+}
+
+
+■if～else
+int a = 10;
+if (a > 0)
+{
+	Console.WriteLine("aは正の数です。");
+}
+else
+{
+	Console.WriteLine("aは0以下です。");
+}
+
+■if～else
+int a = -10;
+if (a > 0)
+{
+	Console.WriteLine("aは正の数です。");
+}
+else
+{
+	Console.WriteLine("aは0以下です。");
+}
+
+■if～else if～else
+int a = 0;	//　いろいろな値に変えてみる
+if (a > 0)
+{
+	Console.WriteLine("aは正の数です。");
+}
+else if(a == 0)
+{
+	Console.WriteLine("aは0です。");
+}
+else
+{
+	Console.WriteLine("aは負の数です。");
+}
+
+■複数の条件
+int a = 10;
+int b = 10;
+if(a == 10 && b == 10){
+	Console.WriteLine("aもbも10です");
+}
+
+
+■複数の条件
+int a = 10;
+int b = 10;
+if(a == 10 || b == 10){
+	Console.WriteLine("aかbが10です");
+}
+
+■論理の反転
+int a = 0;
+if (!(a == 10))
+{
+	Console.WriteLine("aは10ではありません。");
+}
+
+■論理の反転
+string s = "world"; //　いろいろな値に変えてみる
+if (!s.Equals("hello"))
+{
+	Console.WriteLine("sは「world」ではありません。");
+}
+
+■switchによる条件分岐
+int num = 1;
+switch(num){
+case 1:
+    Console.WriteLine("one");    //  numが1の場合
+    break;
+case 2:
+    Console.WriteLine("two");    //  numの場合
+    break;
+case 3:
+    Console.WriteLine("three");  //  numの場合
+    break;
+default:
+    Console.WriteLine("不適切な値です。"); //  それ以外の値
+    break;
+}
+
+■switchによる条件分岐
+int num = 1;
+if(num == 1){
+	Console.WriteLine("one");    //  numが1だった場合の処理
+}else if(num == 2){
+	Console.WriteLine("two");    //  numが2だった場合の処理
+}else{
+	Console.WriteLine("不適切な値です。"); //  それ以外の値が入力された場合の処理
+}
+
+■breakとcontinue
+for (int i = 0; i < 5; i++){
+	if (i == 3){
+		break;  //  ループから抜ける
+	}
+      Console.WriteLine(i);
+}
+
+■breakとcontinue
+for (int i = 0; i < 5; i++){
+	if (i == 3){
+		continue;  //  先頭に戻る
+	}
+      Console.WriteLine(i);
+}
+
+■while分とbreak
+int i = 0;
+while(i < 5){
+    if(i ==3){
+        break;
+    }
+    Console.WriteLine(i);
+    i++;
+}  
+
+■while分とcontinue
+int i = 0;
+while(i < 5){
+    i++;
+    if(i ==3){
+        continue;
+    }
+    Console.WriteLine(i);
+}
+
+■乱数
+//  乱数の初期設定
+Random rnd = new Random();
+// 1以上7未満の乱数を発生させる（1から6まで）
+int dice = rnd.Next(1, 7);  
+Console.WriteLine(dice);
+
+■無限ループ
+
+Random rnd = new Random();
+Console.WriteLine("6が出たら終了");
+//  無限ループ
+while(true){
+  int dice = rnd.Next(1, 7);
+  Console.WriteLine(dice);
+  if(dice == 6){
+    break;  // ループから抜ける
+  }
+}
+
+■配列変数とforeachループ
+int[] n = { 1, 2, 3 };
+foreach(int i in n){
+	Console.WriteLine(i);
+}
+
+■【参考】forの二重ループ
+for(int i = 1; i <= 2; i++){
+  // 内側のループ
+  for(int j = 1; j <=3 ; j++){
+      System.Console.WriteLine("i:"+i+" / j:"+j);
+   }
+    System.Console.WriteLine("---");
+}
+
+■Personクラス
+public class Person
+{
+	//  名前フィールド
+	public string name;
+	//  年齢フィールド
+	public int age;
+}
+
+■Personクラスのインスタンスの生成
+Person p = new Person();
+p.name = "太郎";
+p.age = 18;
+Console.WriteLine("名前:{0} 年齢:{1}", p.name, p.age);
+
+■複数のインスタンス
+Person p1 = new Person();
+p1.name = "太郎";
+p1.age = 18;
+Console.WriteLine("名前:{0} 年齢{1}", p1.name, p1.age);
+Person p2 = new Person();
+p2.name = "花子";
+p2.age = 16;
+Console.WriteLine("名前:{0} 年齢{1}", p2.name, p2.age);
+
+■演習1：名前を保持するクラスの作成
+
+public class Student
+{
+    public string name;
+    public int grade;
+}
+
+■演習2：名前を保持するクラスのオブジェクト生成
+
+Student s = new Student();
+s.name = "鈴木ひまり";
+s.grade = 3;
+Console.WriteLine("名前:{0} 学年:{1}",s.name,s.grade);
+
+
+

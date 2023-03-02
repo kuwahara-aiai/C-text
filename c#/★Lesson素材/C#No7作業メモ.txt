@@ -1,0 +1,118 @@
+■現在時刻の取得と表示
+DateTime t = DateTime.Now;
+Console.WriteLine(t);
+
+■現在時刻の取得と表示
+DateTime t = DateTime.Now;
+string result = t.ToString("yyyy/MM/dd hh:mm:ss");
+Console.WriteLine(result);
+
+■現在時刻の取得と表示
+DateTime t = DateTime.Now;
+string result = t.ToString("yyyy年MM月dd日 hh時mm分ss秒");
+Console.WriteLine(result);
+
+■任意の時刻を表示
+DateTime t = new DateTime(2022, 10, 1, 12, 34, 56);
+Console.WriteLine(t);
+
+■任意の時刻を表示
+string st = "2022/10/01 12:34:56";
+DateTime t = DateTime.Parse(st);
+Console.WriteLine(t);
+
+■時間・分・秒の差分を求める
+DateTime oldDateTime = new DateTime(2010, 10, 01, 12, 34, 56);
+TimeSpan ts = DateTime.Now - oldDateTime;
+Console.WriteLine(ts);
+
+■時間・分・秒の差分を求める
+DateTime oldDateTime = new DateTime(2010, 10, 01, 12, 34, 56);
+TimeSpan ts = DateTime.Now - oldDateTime;
+Console.WriteLine(ts.Days);     // 日
+Console.WriteLine(ts.Hours);    // 時        
+Console.WriteLine(ts.Minutes);  // 分
+Console.WriteLine(ts.Seconds);  // 秒 
+
+■日の差分を求める
+DateTime oldDateTime = new DateTime(2010, 10, 01, 12, 34, 56); 
+TimeSpan ts = DateTime.Now - oldDateTime;
+Console.WriteLine(ts.Days + "日の差があります。");
+
+※以下、「using System.IO;」が必須
+
+■ファイルの書き込み（新規）
+string name = @"C:\\MyFolder\\sample.txt";
+using (StreamWriter sw = new StreamWriter(name, false, Encoding.UTF8))
+{
+	sw.WriteLine("Apple");  // 改行あり
+	sw.Write("Banana");     // 改行無し
+      sw.WriteLine("Orange"); // 改行あり
+}
+
+■ファイルの書き込み（追加）
+string name = @"C:\\MyFolder\\sample.txt";
+using (StreamWriter sw = new StreamWriter(name, false, Encoding.UTF8))
+{
+	sw.WriteLine("Apple");  // 改行あり
+	sw.Write("Banana");     // 改行無し
+      sw.WriteLine("Orange"); // 改行あり
+}
+
+■ファイル読み込み
+using (StreamReader sr = new StreamReader(@"C:\\MyFolder\\sample.txt"))
+{
+	string text = sr.ReadToEnd();
+	Console.WriteLine(text);
+}
+
+
+■ファイルの読み込み
+StreamReader sr = new StreamReader(@"C:\\MyFolder\\sample.txt");
+while (sr.EndOfStream == false)
+{
+	Console.WriteLine(sr.ReadLine());
+}
+sr.Close();
+
+■ファイルの存在
+string path1 = @"C:\\MyFolder\\sample.txt"; // 存在するファイル
+string path2 = @"C:\\MyFolder\\dummy.txt";  // 存在しないファイル
+Console.WriteLine(File.Exists(path1));
+Console.WriteLine(File.Exists(path2));
+
+■新規ファイル作成
+FileStream fs = File.Create(@"C:\\MyFolder\\sample2.txt");
+fs.Close();
+
+■新規ファイル作成
+FileInfo fi = new FileInfo(@"C:\\MyFolder\\sample3.txt");
+FileStream fs = fi.Create();
+fs.Close();
+
+■演習：アクセスカウンターの作成(日時＋アクセス数を書き込む)
+
+public class AccessCounter
+{
+    private string path = "";
+    public AccessCounter(string path)
+    {
+        this.path = path;
+    }
+    public void Log(int access)
+    {
+            
+        using (StreamWriter sw = new StreamWriter(this.path, true, Encoding.UTF8))
+        {
+            DateTime t = DateTime.Now;
+            string result = t.ToString("yyyy年MM月dd日 hh時mm分ss秒:");
+            sw.Write(result);
+            sw.WriteLine("{0}アクセス", access);
+        }
+    }
+}
+
+string path = @"C:\\MyFolder\\accesslog.txt";
+AccessCounter ac = new AccessCounter(path);
+ac.Log(100);
+

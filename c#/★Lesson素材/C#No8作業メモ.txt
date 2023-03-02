@@ -1,0 +1,248 @@
+■toStringメソッド①（Dummy.cs）
+
+public class Dummy
+{
+    public override string ToString()
+    {
+        return "Dummy";
+    }
+}
+
+■toStringメソッド②（Program.csのMainメソッドの処理）
+
+Dummy d = new Dummy();
+Console.WriteLine(d);   //  ToStringメソッドが呼ばれる
+
+
+■Fish.cs
+
+public class Fish
+{
+    //  フィールド
+    private String name;
+    private int point;
+    //  コンストラクタ
+    public Fish(string name, int point)
+    {
+        this.name = name;
+        this.point = point;
+    }
+    public override string ToString()
+    {
+        return this.name + "(" + this.point + "pt)";
+    }
+    public int Point
+    {
+        get { return this.point; }
+    }
+}
+
+■事前準備①（Program.csのMainメソッドの処理）
+
+//  インスタンスの生成（マグロ・100pt）
+Fish fish = new Fish("マグロ", 100);
+//  ポイントの確認
+Console.WriteLine(fish.Point);
+//  ToStringの動作確認
+Console.WriteLine(fish);
+
+
+■FishList.cs
+
+
+public class FishList
+{
+	private Random rnd = new Random();
+	private List<Fish> box = new List<Fish>();
+	public FishList()
+	{
+		this.box.Add(new Fish("マグロ", 100));
+		this.box.Add(new Fish("タイ", 120));
+		this.box.Add(new Fish("サケ", 80));
+		this.box.Add(new Fish("ブリ", 70));
+		this.box.Add(new Fish("イカ", 30));
+		this.box.Add(new Fish("ホタテ", 20));
+		this.box.Add(new Fish("アジ", 15));
+		this.box.Add(new Fish("メダカ", 3));
+		this.box.Add(new Fish("ゴミ", 0));
+		this.box.Add(new Fish("おじさん", -50));
+	}
+	public Fish RandomFish()
+	{
+		int n = rnd.Next(0, box.Count);
+		return this.box[n];
+	}
+	public static void ListTest()
+	{
+		FishList fl = new FishList();
+		for (int i = 0; i < fl.box.Count; i++)
+          	{
+			Console.WriteLine(fl.box[i]);
+		}
+	}	
+	public static void RandTest(int n)
+	{
+		Console.WriteLine("-------------------");
+		FishList fl = new FishList();
+		for(int i = 0; i < n; i++)
+           	{
+			Console.WriteLine(fl.RandomFish());
+		}
+	}
+}
+
+■事前準備②その１（Program.csのMainメソッドの処理）
+
+FishList.ListTest();
+
+
+■事前準備②その2（Program.csのMainメソッドの処理）
+
+FishList.RandTest(10);
+
+■Place.cs
+
+public class Place
+{
+	public List<Fish> pbox = new List<Fish>();
+	public Place()
+	{
+		FishList fl1 = new FishList();
+		this.pbox.Add(fl1.RandomFish());
+		this.pbox.Add(fl1.RandomFish());
+		this.pbox.Add(fl1.RandomFish());
+		this.pbox.Add(fl1.RandomFish());
+		this.pbox.Add(fl1.RandomFish());
+	}
+	public Fish GetFish(int index)
+      {
+		return this.pbox[index];
+      }
+	public int NumOfPlaces()
+	{
+		return this.pbox.Count;
+	}
+	public static void Test()
+      {
+		Place p1 = new Place();
+		Console.WriteLine("場所の数:"+p1.NumOfPlaces());
+		for(int i = 0; i < p1.NumOfPlaces(); i++)
+      	{
+			Console.WriteLine(p1.GetFish(i));
+		}	
+	}
+}
+
+
+■事前準備③（Program.csのMainメソッドの処理）
+
+Place.Test();
+
+■Game.cs
+
+public class Game
+{  
+	//  合計点数
+	int total = 0;
+	//  回数
+	int kaisu = 3;
+	public Game(int kaisu)
+	{
+		this.kaisu = kaisu;
+	} 
+	public void Play()
+	{
+		Start();
+		int i = 1;
+		while (i <= kaisu)
+		{
+			Place p1 = new Place(); //釣るスポットにセットする魚をリセット
+			Console.WriteLine("\n-------------------------");
+			Console.WriteLine(i + "回目のチャレンジ！");
+			Console.WriteLine("スポット選択：0～4の半角数字を入力して選びましょう");
+			int index = int.Parse(Console.ReadLine());
+			// 入力値が0～4かのチェック
+			if (index >= 0 && index < p1.NumOfPlaces())
+			{
+				Fish fish = p1.GetFish(index);
+				this.total += fish.Point;
+				Console.WriteLine("選んだスポット：" + index);
+				Console.WriteLine("釣れた魚：" + fish);
+				i++;
+			}
+			else
+			{
+				Console.WriteLine("【エラー】入力値が不正です。再度入力してください");
+			}
+			Finish();
+		}
+
+	}
+	private void Start()
+	{
+		this.total = 0;
+		Console.WriteLine("【釣りアプリ】");
+	}
+	private void Finish()
+	{
+		Console.WriteLine("\n=========================");
+		Console.WriteLine("合計点は" + total + "です！");
+	}
+}
+
+■Game.cs
+
+public class Game
+{  
+	//  合計点数
+	int total = 0;
+	//  回数
+	int kaisu = 3;
+	public Game(int kaisu)
+	{
+		this.kaisu = kaisu;
+	} 
+	public void Play()
+	{
+		Start();
+		int i = 1;
+		while (i <= kaisu)
+		{
+			Place p1 = new Place(); //釣るスポットにセットする魚をリセット
+			Console.WriteLine("\n-------------------------");
+			Console.WriteLine(i + "回目のチャレンジ！");
+			Console.WriteLine("スポット選択：0～4の半角数字を入力して選びましょう");
+			int index = int.Parse(Console.ReadLine());
+			// 入力値が0～4かのチェック
+			if (index >= 0 && index < p1.NumOfPlaces())
+			{
+				Fish fish = p1.GetFish(index);
+				this.total += fish.Point;
+				Console.WriteLine("選んだスポット：" + index);
+				Console.WriteLine("釣れた魚：" + fish);
+				i++;
+			}
+			else
+			{
+				Console.WriteLine("【エラー】入力値が不正です。再度入力してください");
+			}
+			Finish();
+		}
+
+	}
+	private void Start()
+	{
+		this.total = 0;
+		Console.WriteLine("【釣りアプリ】");
+	}
+	private void Finish()
+	{
+		Console.WriteLine("\n=========================");
+		Console.WriteLine("合計点は" + total + "です！");
+	}
+}
+
+■ゲームのメイン処理（Program.csのMainメソッドの処理）
+
+Game game = new Game(3);
+game.Play();

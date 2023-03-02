@@ -1,0 +1,275 @@
+※あらかじめ「using System.Collections.Generic;」が必要
+
+■基本的なListの使い方
+List<int> a = new List<int>();
+a.Add(3);
+a.Add(2);
+a.Add(1);
+Console.WriteLine(a[0]);
+Console.WriteLine(a[1]);
+Console.WriteLine(a[2]);
+
+■基本的なListの使い方
+List<string> a = new List<string>();
+a.Add("Taro");
+a.Add("Hanako");
+Console.WriteLine(a[0]);
+Console.WriteLine(a[1]);
+
+■複数の値を一度に挿入
+List<int> a = new List<int>{ 3,2,1 };
+Console.WriteLine(a[0]);
+Console.WriteLine(a[1]);
+Console.WriteLine(a[2]);
+
+■Listの長さの取得
+List<int> a = new List<int>{ 3,2,1 };
+Console.WriteLine(a.Count);
+
+■Listの長さの取得
+List<string> a = new List<string>{ "Taro","Hanako" };
+Console.WriteLine(a.Count);
+
+■Listとfor文
+List<int> a = new List<int>{ 3,2,1 };
+for(int i = 0; i < a.Count ; i++)
+{
+	Console.WriteLine("a[{0}]={1} ", i,a[i]);
+}
+
+■Listの値の変更
+List<int> a = new List<int>{ 3,2,1 };
+a[1] = 10;	// 1番を10に変更
+for(int i = 0; i < a.Count ; i++)
+{
+	Console.WriteLine("a[{0}]={1} ", i,a[i]);
+}
+
+■Listへの値の挿入
+List<int> a = new List<int>{ 3,2,1 };
+a.Insert(1, 4);	// 1番目に4を挿入
+for(int i = 0; i < a.Count ; i++)
+{
+	Console.WriteLine("a[{0}]={1} ", i,a[i]);
+}
+
+■foreachとList
+List<string> a = new List<string>{ "Taro","Hanako","Jiro" };
+foreach (String s in a)
+{
+	Console.WriteLine(s);
+}
+
+■Listの要素の削除(Remove)
+List<string> a = new List<string>{ "Taro","Hanako","Jiro" };
+a.Remove("Taro");   //  "Taro"を削除
+foreach (String s in a)
+{
+	Console.WriteLine(s);
+}
+
+■Listの要素の削除(RemoveAt)
+List<string> a = new List<string>{ "Taro","Hanako","Jiro" };
+a.RemoveAt(1);      //  1番目のデータを削除
+foreach (String s in a)
+{
+	Console.WriteLine(s);
+}
+
+■Listの検索
+List<string> a = new List<string>{ "Taro","Hanako","Jiro" };
+Console.WriteLine(a.IndexOf("Jiro"));
+
+■Listのクリア
+List<int> a = new List<int>{ 3,2,1 };
+a.Clear();  //  クリア
+Console.WriteLine(a.Count);
+
+■Dictionaryの生成と利用
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+Console.WriteLine(c["日本"]);
+Console.WriteLine(c["イギリス"]);
+
+■Dictionaryのサイズの確認
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+c["フランス"] = "パリ";
+Console.WriteLine(c.Count);
+
+■Dictionaryのキーの取得
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+foreach (string s in c.Keys)
+{
+	Console.WriteLine(s);
+}
+
+■Dictionaryの値の取得
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+foreach (string s in c.Values)
+{
+	Console.WriteLine(s);
+}
+
+■Dictionaryのキー・値の取得
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+foreach(KeyValuePair<string, string> item in c) {
+	Console.WriteLine("[{0}:{1}]", item.Key, item.Value);  
+}
+
+■Dictionaryの要素の削除
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+c.Remove("イギリス"); //  削除
+foreach(KeyValuePair<string, string> item in c) {
+	Console.WriteLine("[{0}:{1}]", item.Key, item.Value);  
+}
+
+■Dictionaryのサイズの取得
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+Console.WriteLine(c.Count);
+
+■Dictionaryのクリア
+Dictionary<string, string> c = new Dictionary<string, string>();
+c["日本"] = "東京";
+c["イギリス"] = "ロンドン";
+c.Clear(); //  クリア
+Console.WriteLine(c.Count);
+
+■データの登録(Addメソッド)
+HashSet<int> s = new HashSet<int>();
+s.Add(1);
+s.Add(1);
+s.Add(2);
+s.Add(3);
+foreach (int i in s)
+{
+	Console.WriteLine(i);
+}
+
+■データを一括登録
+HashSet<string> names = new HashSet<string>{ "Taro","Hanako","Jiro" };
+foreach (string s in names)
+{
+	Console.WriteLine(s);
+}
+
+■データを削除
+HashSet<string> names = new HashSet<string>{ "Taro","Hanako","Jiro" };
+names.Remove("Taro");
+foreach (string s in names)
+{
+	Console.WriteLine(s);
+}
+
+■データのサイズの取得
+HashSet<string> names = new HashSet<string>{ "Taro","Hanako","Jiro" };
+Console.WriteLine(names.Count);
+
+■集合演算（和集合）
+HashSet<int> nums1 = new HashSet<int>{ 1,2,3,4,5 };
+HashSet<int> nums2 = new HashSet<int>{ 3,4,5,6,7 };
+nums1.UnionWith(nums2); //  和集合
+foreach (int s in nums1)
+{
+	Console.Write(s+" ");
+}
+
+■集合演算（積集合）
+HashSet<int> nums1 = new HashSet<int>{ 1,2,3,4,5 };
+HashSet<int> nums2 = new HashSet<int>{ 3,4,5,6,7 };
+nums1.IntersectWith(nums2); //  積集合
+foreach (int s in nums1)
+{
+	Console.Write(s+" ");
+}
+
+■複雑なコレクションの操作(Listの各要素がDictionaryのパターン)
+//  辞書のリスト
+List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
+//  辞書データの作成
+Dictionary<string, string> data = new Dictionary<string, string>();
+data["name"] =  "山田太郎";
+data["age"] =  "18";
+data["email"]="taro@mail.com";
+//リストへ追加
+list.Add(data);
+//  中身の出力
+foreach(Dictionary<string, string> item in list)
+{
+    Console.WriteLine("名前:{0}", item["name"]);
+    Console.WriteLine("年齢:{0}", item["age"]);
+    Console.WriteLine("メール:{0}", item["email"]);
+}
+
+
+
+■例外が発生するパターン
+int[] a = { 0, 1, 2 };
+Console.WriteLine(a[3]);
+
+■例外処理の例（配列の範囲外へのアクセス）
+try
+{
+	int[] a = { 0, 1, 2 };
+	Console.WriteLine(a[3]);
+}catch(IndexOutOfRangeException e) {
+	//  配列の範囲外
+	Console.WriteLine(e.Message);
+}
+
+■例外処理（ゼロでの割り算）
+try
+{
+	int a = 10, b = 0;
+	Console.WriteLine(a / b);
+}catch(DivideByZeroException e) {
+	//  ゼロでの割り算
+      Console.WriteLine(e.Message);
+}
+
+
+■Exceptionクラス
+try
+{
+	int a = 10, b = 0;
+	Console.WriteLine(a / b);
+}catch(Exception e) {
+	//  ゼロでの割り算
+      Console.WriteLine(e.Message);
+}
+
+■finally(例外が発生する場合)
+try
+{
+	int a = 10,b = 0;
+	Console.WriteLine(a / b);	// 例外発生
+}catch(Exception e) {
+      Console.WriteLine(e.Message);
+}finally{
+	Console.WriteLine("終了");
+}
+
+■finally(例外が発生しない場合)
+try
+{
+	int a = 10,b = 5;
+	Console.WriteLine(a / b);	// 例外なし
+}catch(Exception e) {
+      Console.WriteLine(e.Message);
+}finally{
+	Console.WriteLine("終了");
+}
+
+

@@ -1,0 +1,230 @@
+■Hello Worldの表示
+Console.WriteLine("Hello, World!");
+
+
+■Hello Worldの表示
+// コンソールにHelloWorldと表示して終了
+Console.WriteLine("Hello, World!");
+
+
+■Hello Worldの表示
+/*
+   HelloWorld
+ */
+Console.WriteLine("Hello, World!");
+
+■様々なコンソールへの出力
+Console.Write("ABC");		// 改行なし
+Console.WriteLine("DEF");	// 改行あり
+
+■様々なコンソールへの出力
+Console.Write(123);		// 改行なし
+Console.WriteLine(456);		// 改行あり
+
+■エスケープシーケンス
+Console.WriteLine("\"ABC\"");		// 「"」を表示
+Console.WriteLine("DEF\nGHI");		// 途中で改行
+
+
+■変数の宣言と代入
+int a;  // 変数の宣言
+a = 6;  // 代入
+Console.WriteLine(a);	//参照
+
+■変数の宣言と代入
+int b = 3;	// 宣言と初期化を同時に行う
+Console.WriteLine(b);
+Console.WriteLine("b={0}", b); // 文章に変数の値を埋め込んで出力
+
+■変数の宣言と代入
+string s = "abc";	// 宣言と初期化を同時に行う
+Console.WriteLine(s);
+Console.WriteLine("s={0}", s); // 文章に変数の値を埋め込んで出力
+
+■ constキーワード
+const int NUMBER = 100;
+// NUMBER = 10;
+Console.WriteLine(NUMBER);
+
+■変数の練習
+int num = 123;
+Console.WriteLine(num);
+
+■型変換とキャスト
+double d = 1.24;
+int a = (int)d;
+Console.WriteLine("a={0}", a);   
+
+■型変換とキャスト
+int a = 5;
+double d = a;
+Console.WriteLine("d={0}", a); 
+
+■キャストが必要なケース
+int a = 5;
+double d = a;
+Console.WriteLine("d={0}", a);
+
+■キャストが必要なケース
+double d = 1.24;
+int a = d; // エラー
+Console.WriteLine(“a={0}”, a); 
+
+■Parseメソッドによる型変換
+string s = "12345";
+int n = int.Parse(s);   // 文字列から整数への変換
+Console.WriteLine(n);
+
+■Parseメソッドによる型変換
+string s = "123.45";
+double d = double.Parse(s);   // 文字列から実数への変換
+Console.WriteLine(d);
+
+■例外の発生
+string s = "abcdef";
+double d = double.Parse(s);   // 文字列から実数への変換
+Console.WriteLine("b={0}", b); // 文章に変数の値を埋め込んで出力
+
+■ToStringによる型変換
+int num = 10;
+string numStr = num.ToString();
+Console.WriteLine(numStr);
+
+■ToStringによる型変換
+double d = 1.23;
+string numStr = d.ToString();
+Console.WriteLine(numStr);
+
+■演算子と式
+
+Console.WriteLine("{0} + {1} = {2}", 5, 2, 5 + 2);
+
+■演算子と式  
+
+Console.WriteLine("{0} - {1} = {2}", 5, 2, 5 - 2); 
+Console.WriteLine("{0} * {1} = {2}", 5, 2, 5 * 2);
+Console.WriteLine("{0} * {1} = {2} 余り {3}", 5, 2, 5 / 2, 5 % 2);
+
+■演算子の優先順位と()
+Console.WriteLine(10 + 5 * 2);
+
+
+■演算子の優先順位と()
+Console.WriteLine((10 + 5) * 2);
+
+
+■変数と演算
+int a = 6, b = 3;
+double avg = (a + b) / 2.0; // aとbの平均値を求める
+Console.WriteLine("{0}と{1}の平均値{2}", a, b, avg);
+
+■変数と演算
+int a = 2,b = 3;
+a = a + 2; 	// aに2を足す
+b = b * 4;		// bに4をかける
+Console.WriteLine("a={0} b={1}", a,b);
+
+
+■代入演算子
+int a = 2,b = 3;
+a += 2;	// aに2を足す
+b *= 4;	// bに4をかける
+Console.WriteLine("a={0} b={1}", a,b);
+
+■文字列の結合
+string s1 = "ABC";
+string s2 = "DEF";
+string s3 = s1 + s2;
+Console.WriteLine(s3);
+
+
+■文字列の結合
+int a = 2;
+string s = "a";
+System.Console.WriteLine(s+a);
+
+■配列の作成と取得
+double[] d = new double[3];
+d[0] = 1.2;
+d[1] = 3.7;
+d[2] = 4.1;
+Console.WriteLine("{0} {1} {2}", d[0], d[1], d[2]);
+
+■配列の作成と取得
+double[] d = {1.2, 3.7, 4.1};
+Console.WriteLine("{0} {1} {2}", d[0], d[1], d[2]);
+
+
+■さまざまな種類の配列
+int[] n = {0, 2, 3, 5};
+Console.WriteLine("{0} {1} {2} {3}", n[0], n[1], n[2], n[3]);
+
+■さまざまな種類の配列
+string[] s = { "abc", "def" };
+Console.WriteLine("{0} {1} {2}", s[0], s[1]);
+
+■配列の長さの取得
+double[] d = {1.2, 3.7, 4.1};
+Console.WriteLine(d.Length);
+
+■ループ処理１for文
+for(int i = 0; i < 5; i++){
+	Console.WriteLine(i);
+}
+
+■ループ処理１for文
+for(int i = 4; i > 0; i--){
+	Console.WriteLine(i);
+}
+
+■ループ処理２while文
+int i = 0;
+while(i < 5){
+    System.Console.WriteLine(i);
+    i++;
+}
+
+■ループ処理２while文
+int i = 4;
+while(i > 0){
+    System.Console.WriteLine(i);
+    i--;
+}
+
+
+■配列の要素をループで順番に取得
+double[] d = { 1.2, 3.7, 4.1 };
+for (int i = 0; i < d.Length; i++){
+	Console.WriteLine(d[i]);
+}
+
+
+■演習問題１：変数と演算
+int num1 = 10;
+int num2 = 20;
+int num = num1 + num2;
+Console.WriteLine(num);
+
+■演習問題 2：ループ処理(for文)
+for(int i = 2; i < 6; i++){
+	Console.WriteLine(i);
+}
+
+■演習問題 3：配列とループ処理(for文)
+string[] sports = {"soccer", "tennis", "basketball"};
+for(int i = 0; i < sports.Length; i++){
+	Console.WriteLine(sports[i]);
+}
+
+■演習問題 4:配列とループ処理(for文)
+string[] fruits = { "apple", "orange", "banana"};
+for(int i = 0; i < fruits.Length; i++){
+	Console.WriteLine(fruits[i]);
+}
+Console.WriteLine("{0}種類",fruits.Length);
+
+■演習問題 5:配列とループ処理(for文)
+int[] dice = { 1, 6, 3 };
+for(int i = 0; i < dice.Length ; i++){
+	Console.WriteLine(7-dice[i]);
+}

@@ -1,0 +1,322 @@
+■Personクラスにメソッド（引数なし、戻り値なし）を追加
+public class Person
+{
+	//  名前フィールド
+	public string name;
+	//  年齢フィールド
+	public int age;
+	//  情報を表示するメソッド
+	public void Show()
+	{
+		Console.WriteLine("名前:{0} 年齢{1}", this.name, this.age);
+	}  
+}
+
+■Personクラスのインスタンスの生成とメソッドの利用
+Person p = new Person();
+p.name = "太郎";
+p.age = 18;
+p.Show();
+
+■複数のインスタンス
+Person p1 = new Person();
+Person p2 = new Person();
+p1.name = "太郎";
+p1.age = 18;
+p1.Show();
+p2.name = "花子";
+p2.age = 16;
+p2.Show();
+
+■メソッド(引数なし、戻り値あり) … 商品クラス
+
+public class Product
+{
+    public int price;       //  価格
+    public int tax_rate;    //  税率
+    //  税込み価格の取得
+    public int CalcPrice()
+    {
+        return price + price * tax_rate / 100;
+    }
+}
+
+Product p = new Product();
+p.price = 1000;     // 価格1000円
+p.tax_rate = 10;    // 税率10%
+Console.WriteLine("税込み価格:{0}", p.CalcPrice());
+
+
+■メソッド(引数あり、戻り値なし) … 電子マネークラス
+
+public class EMoneny
+{
+    public int money = 0;   // 金額
+    public void Charge(int money)
+    {
+        this.money += money;   //   お金をチャージ
+        Console.WriteLine("残高:{0}円",this.money);
+    }
+    public void Spend(string product,int price)
+    {
+        this.money -= price;
+        Console.WriteLine("商品:{0} 価格{1}円",product,price);
+        Console.WriteLine("残高:{0}円",this.money);
+    }
+}
+
+EMoneny m = new EMoneny();
+m.Charge(5000);             //  5000円チャージ
+m.Spend("ラーメン",1000);   //  ラーメン購入    
+
+■メソッド(引数あり、戻り値あり) … 購入クラス
+
+
+public class Buy
+{
+    public int unit_price;      //  単価
+    //  値引き後の製品価格
+    public int Price(int number,int tax_rate)
+    {
+        int price = unit_price * number;   //   商品の総額
+        price += (price * tax_rate)/100;   //   消費税を追加
+       return price;   //  税込みの総額
+    }
+}
+
+Buy product = new Buy();
+product.unit_price = 100;               //  商品単価100円
+int price = product.Price(50, 0.1);     //  50個を税率10%で購入
+Console.WriteLine("購入価格:{0}円", price);	//　総額表示
+
+
+■演習1：足し算をするクラスの作成
+public class Calc{
+	public int num1 = 0;	// １つ目の数
+	public int num2 = 0;	// ２つ目の数
+	// 足し算の結果を得るメソッド
+	public int Add(){
+		return this.num1 + this.num2;
+	}
+}
+
+■演習2：足し算をするクラスのインスタンスの生成
+Calc c = new Calc();
+c = new Calc();
+c.num1 = 10;
+c.num2 = 20;
+Console.WriteLine("{0}+{1}={2}",c.num1,c.num2,c.Add());
+
+■演習3：その他のメソッドの追加
+public class Calc{
+	public int num1 = 0;	// １つ目の数
+	public int num2 = 0;	// ２つ目の数
+	// 足し算の結果を得るメソッド
+	public int Add(){
+		return this.num1 + this.num2;
+	}
+	// 引き算の結果を得るメソッド
+	public int Sub(){
+		return this.num1 - this.num2;
+	}
+	// 掛け算の結果を得るメソッド
+	public int Mul(){
+		return this.num1 * this.num2;
+	}
+}
+
+
+■演習4:（Calcクラスの機能追加）
+Calc c = new Calc();
+c = new Calc();
+c.num1 = 10;
+c.num2 = 20;
+Console.WriteLine("{0}+{1}={2}",c.num1,c.num2,c.Add());
+Console.WriteLine("{0}-{1}={2}",c.num1,c.num2,c.Sub());
+Console.WriteLine("{0}*{1}={2}",c.num1,c.num2,c.Mul());
+
+■コンストラクター
+public class Person
+{
+    //	コンストラクター
+    public Person()
+    {
+		Console.WriteLine("Personクラスのインスタンスの生成");
+    }
+    //  名前フィールド
+    public string name;
+    //  年齢フィールド
+    public int age;
+    //  情報を表示するメソッド
+    public void Show()
+    {
+		nsole.WriteLine("名前:{0} 年齢{1}", this.name, this.age);
+    }
+}
+
+
+■引数のついたコンストラクター
+public class Person
+{
+	//  コンストラクター
+	public Person(string name, int age)
+	{
+		this.name = name;
+		this.age = age;
+	}
+	//  名前フィールド
+	public string name;
+	//  年齢フィールド
+	public int age;
+	//  情報を表示するメソッド
+	public void Show()
+	{
+		Console.WriteLine("名前:{0} 年齢{1}", this.name, this.age);
+	}
+}
+
+■引数のついたコンストラクター
+Person p = new Person("太郎", 18);
+p.Show();
+
+■public修飾子の問題点
+Person p = new Person("太郎", 18);
+p.name = "花子";
+p.age = 16;
+p.Show();
+
+■private修飾子
+public class Person
+{
+	//  名前フィールド
+	private string name;
+	//  年齢フィールド
+	private int age;
+	//	コンストラクタ
+	public Person(string name,int age)
+      {
+		this.name = name;
+		this.age = age;
+      }
+	//  情報を表示するメソッド
+	public void Show()
+	{
+		Console.WriteLine("名前:{0} 年齢{1}", this.name, this.age);
+	}
+}
+
+■private修飾子
+Person p = new Person("太郎", 18);
+//p.name = "花子";	//  コメントとるとエラーになる
+//p.age = 16;    		//  コメントとるとエラーになる
+p.Show();
+
+■カプセル化
+public class Car
+{
+	private int fuel;
+	public void SetFuel(int fuel)
+	{
+		this.fuel = fuel;
+      }
+	public int GetFuel()
+      {
+		return this.fuel;
+      }
+}
+
+■カプセル化
+Car c = new Car();
+c.SetFuel(10);
+Console.WriteLine("燃料:{0}", c.GetFuel());
+
+■プロパティ
+public class Car
+{
+	private int fuel;
+	public int Fuel
+      {
+		set { fuel = value; }
+            get { return fuel; }
+      }
+}
+
+■プロパティ
+Car c = new Car();
+c.Fuel = 10;
+Console.WriteLine("燃料:{0}", c.Fuel);
+
+■読み取り専用のプロパティ
+string name;
+public City(string name)
+{
+	this.name = name;
+}
+public string Name
+{
+	get { return name; }
+}
+
+■読み取り専用のプロパティ
+City c = new City("東京都");
+//c.Name = "大阪市";   //  エラーになる
+Console.WriteLine(c.Name);
+
+■演習：単純なRPGの作成１(キャラ作成)
+public class GameChar
+{
+    private int hp;  //  ヒットポイント
+    public GameChar(int hp)
+    {
+        this.hp = hp;
+    }
+    public void Attack(int damage)
+    {
+        this.hp -= damage;
+        if(this.hp <= 0)
+        {
+            hp = 0;
+        }
+    }
+    public void ShowHP()
+    {
+        Console.WriteLine("HP:{0}", this.hp);        
+    }
+    public int HP
+    {
+        get { return hp; }
+    }
+}
+
+Console.WriteLine("RPGゲーム");
+GameChar c = new GameChar(10);
+c.ShowHP();
+
+
+■演習：単純なRPGの作成２(1回ランダムにダメージを与える)
+
+Console.WriteLine("RPGゲーム");
+GameChar c = new GameChar(10);
+c.ShowHP();
+Random r = new Random();
+/* 演習2 */
+int attack = r.Next(1, 10);
+c.Attack(attack); //  敵の攻撃
+Console.WriteLine("{0}の攻撃を受ける", attack);
+c.ShowHP();
+
+■演習：単純なRPGの作成３(倒れるまでランダムにダメージを与える)
+
+Console.WriteLine("RPGゲーム");
+GameChar c = new GameChar(10);
+c.ShowHP();
+Random r = new Random();
+/* 演習3 */
+while(c.HP != 0)
+{
+    int attack = r.Next(1, 10);
+    c.Attack(attack); //  敵の攻撃
+    Console.WriteLine("{0}の攻撃を受ける", attack);
+    c.ShowHP();
+}
+Console.WriteLine("**死亡**");

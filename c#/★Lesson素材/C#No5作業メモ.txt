@@ -1,0 +1,485 @@
+■(復習)単純なRPGの作成(キャラ作成)
+public class GameChar
+{
+    private int hp;  //  ヒットポイント
+    public GameChar(int hp)
+    {
+        this.hp = hp;
+    }
+    public void Attack(int damage)
+    {
+        this.hp -= damage;
+        if(this.hp <= 0)
+        {
+            hp = 0;
+        }
+    }
+    public void ShowHP()
+    {
+        Console.WriteLine("HP:{0}", this.hp);        
+    }
+    public int HP
+    {
+        get { return hp; }
+    }
+}
+
+Console.WriteLine("RPGゲーム");
+GameChar c = new GameChar(10);
+c.ShowHP();
+
+■継承（スーパークラス）
+
+public class Car
+{
+    public int speed = 0;
+    public void Run()
+    {
+        Console.WriteLine("時速{0}kmで走行する",speed);
+    }
+}
+
+
+Car car = new Car();
+car.speed = 50;
+car.Run();
+
+■継承（サブクラス）
+
+public class Taxi : Car
+{
+    public int price = 500;
+    public void Show()
+    {
+        Console.WriteLine("初乗り{0}円",price);
+    }
+}
+
+■継承（コンストラクタの呼び出し順）
+
+public class SuperCls
+{
+    public SuperCls()
+    {
+        Console.WriteLine("スーパークラスのコンストラクタ");
+    }
+}
+
+
+public class SubCls : SuperCls
+{
+    public SubCls()
+    {
+        Console.WriteLine("サブクラスのコンストラクタ");
+    }
+}
+
+//	サブクラスのインスタンスの生成
+SubCls subCls = new SubCls();
+
+■継承（protected修飾子）
+
+public class SuperCls
+{
+    protected int p1 = 10;
+    private int p2 = 20;
+    public SuperCls()
+    {
+        Console.WriteLine("スーパークラスのコンストラクタ");
+    }
+}
+
+public class SubCls : SuperCls
+{
+    public SubCls()
+    {
+        Console.WriteLine("サブクラスのコンストラクタ");
+    }
+    public void Show()
+    {
+        //  protectedへはアクセスできる
+        Console.WriteLine("p1={0}", p1);
+        //  privateにはアクセスできない
+        //Console.WriteLine("p2={0}", p2);
+    }
+}
+
+SubCls subCls = new SubCls();
+// private,protectedには外部からアクセスできない
+// subCls.p1 = 100;
+// subCls.p2 = 200;
+subCls.Show();
+
+
+■オーバーライド
+
+public class Person
+{
+    public string name;
+    public virtual void Show()
+    {
+        Console.WriteLine("名前:{0}", name);
+    }
+}
+
+Person person = new Person();
+person.name = "山田太郎";
+person.Show();
+
+■オーバーライド
+
+    
+public class Student : Person
+{
+    public int grade = 1;
+    //  Showメソッドをオーバーライド
+    public override void Show()
+    {
+        Console.Write("学年:{0}年 ", grade);
+        base.Show();
+    }
+}
+
+Student student = new Student();
+student.name = "山田太郎";
+student.grade = 3;
+student.Show();
+
+■オーバーライド（コンストラクタ）
+
+public class Person
+{
+    private string name;
+    public Person(string name)
+    {
+        this.name = name;
+    }
+    public virtual void Show()
+    {
+        Console.WriteLine("名前:{0}", name);
+    }
+}
+
+Person person = new Person("山田太郎");
+person.Show();
+
+■オーバーライド（コンストラクタ）
+
+public class Student : Person
+{
+    private int grade = 1;
+    public Student(int grade,string name) : base(name)
+    {
+        this.grade = grade;
+    }
+    //  Showメソッドをオーバーライド
+    public override void Show()
+    {
+        Console.Write("学年:{0}年 ", grade);
+        base.Show();
+    }
+}
+
+Student student = new Student(3, "山田太郎");
+student.Show();
+
+■継承（RPGに適用してみる）
+public class GameChar
+{
+    protected int hp;  //  ヒットポイント()
+    public GameChar(int hp)
+    {
+        this.hp = hp;
+    }
+    public virtual void Attack(int damage)
+    {
+        this.hp -= damage;
+        if (this.hp <= 0)
+        {
+                hp = 0;
+        }
+    }
+    public void ShowHP()
+    {
+        Console.WriteLine("HP:{0}", this.hp);
+    }
+    public int HP
+    {
+        get { return hp; }
+    }
+}
+
+public class Hello : GameChar
+{
+    public Hello() : base(10)
+    {
+    }
+    public override void Attack(int damage)
+    {
+        base.Attack(damage);
+        if(hp == 0)
+        {
+            Console.WriteLine("== 勇者よ、死んでしまうとは情けない ==");
+        }
+    }
+}
+
+Console.WriteLine("RPGゲーム");
+Hello c = new Hello();
+c.ShowHP();
+Random r = new Random();
+while (c.HP != 0)
+{
+    int attack = r.Next(1, 10);
+    c.Attack(attack); //  敵の攻撃
+    Console.WriteLine("勇者が{0}の攻撃を受ける", attack);
+    c.ShowHP();
+}
+Console.WriteLine("**ゲームオーバー**");
+
+■オーバーロード
+
+public class Car
+{
+    public void Run()
+    {
+        Console.WriteLine("走行する");
+    }
+    public void Run(int speed)
+    {
+        Console.WriteLine("時速{0}kmで走行する", speed);
+    }
+}
+
+Car car = new Car();
+car.Run();      //  Runメソッド（引数なし）
+car.Run(50);    //  Runメソッド（引数あり）
+
+■オーバーロード(コンストラクタ)
+
+public class Person
+{
+    string name;
+    public Person()
+    {
+        name = "NoName";
+    }
+    public Person(string name)
+    {
+        this.name = name;
+    }
+    public void ShowName()
+    {
+        Console.WriteLine(name);
+    }
+}
+
+Person p1 = new Person();
+p1.ShowName();
+Person p2 = new Person("Taro");
+p2.ShowName();
+
+■抽象クラス
+
+public abstract class Bird
+{
+    protected string name;
+    //  通常のメソッド
+    public void Show()
+    {
+        Console.WriteLine(name);
+    }
+    //  抽象メソッド  
+    public abstract void Sing();
+}
+
+//Bird b = new Bird();
+
+■抽象クラス
+
+public class Crow : Bird
+{
+    public Crow()
+    {
+        base.name = "カラス";
+    }
+    public override void Sing()
+    {
+        Console.WriteLine("カーカー");
+    }
+}
+
+Crow cr = new Crow();
+
+cr.Show();
+cr.Sing();
+
+■抽象クラス
+
+public class Chicken : Bird
+{
+    public Chicken()
+    {
+        base.name = "にわとり";
+    }
+    public override void Sing()
+    {
+        Console.WriteLine("コケコッコー");
+    }
+}
+
+Chicken ch = new Chicken();
+
+ch.Show();
+ch.Sing();
+
+■抽象クラス
+
+Bird[] birds = new Bird[2];
+// カラス・ニワトリともに「鳥」として扱える
+birds[0] = new Crow();
+birds[1] = new Chicken();
+for(int i = 0; i < birds.Length; i++)
+{
+    birds[i].Sing();
+}
+
+■インターフェース
+
+public class CellPhone : IPhone,IMailer
+{
+    public void Phone(string telno)
+    {
+        Console.WriteLine("{0}に電話をかける",telno);
+    }
+    public void Mail(string addr)
+    {
+        Console.WriteLine("{0}にメールを送る", addr);
+    }
+}
+
+public interface IPhone
+{
+    void Phone(string telno);
+}
+
+public interface IMailer
+{   
+    void Mail(string addr);
+}
+
+■インターフェース
+IPhone ph = (IPhone)cp;
+ph.Phone("03-xxx-xxxx");
+//  コメントをとるとエラーになる（Mailメソッドは使えない）
+//ph.Mail("hoge@fuga.com");
+
+IMailer ml = (IMailer)cp;
+ml.Mail("hoge@fuga.com");   //  メール機能の利用
+// コメントをとるとエラーになる（Phoneメソッドは使えない）
+//  ml.Phone("03-xxx-xxxx");
+
+■抽象クラスとインターフェイスの違い・使いどころ(抽象クラス)
+
+
+// 内部の変更をユーザーに意識させることなくバージョンアップさせることができる
+// ガソリン車のインスタンスの生成
+AbsCar gc = new GasCar();
+gc.Charge();
+gc.Run();
+//  電気自動車のインスタンスの生成
+AbsCar ec = new ElecCar();
+ec.Charge();
+ec.Run();
+
+■抽象クラスとインターフェイスの違い・使いどころ(インターフェース)
+
+public interface IMusicPlayer
+{
+    void Play();
+}
+
+public interface ICamera
+{
+    void Photo();
+}
+
+■抽象クラスとインターフェイスの違い・使いどころ(インターフェース)
+
+public class SmartPhone : IMusicPlayer,ICamera
+{
+    public void Play()
+    {
+        Console.WriteLine("スマホで音楽を聴く");
+    }
+    public void Photo()
+    {
+        Console.WriteLine("スマホで写真を撮る");
+    }
+}
+
+public class DigitalCamera : ICamera
+{
+    public void Photo()
+    {
+        Console.WriteLine("デジカメで写真を撮る");
+    }
+}
+
+public class Audio : IMusicPlayer
+{
+    public void Play()
+    {
+        Console.WriteLine("オーディオで音楽を聴く");
+    }
+}
+
+■抽象クラスとインターフェイスの違い・使いどころ(インターフェース)
+
+//　異なるでデバイスの中にある共通機能に共通の使用方法を提供できる
+Audio audio = new Audio();
+SmartPhone phone = new SmartPhone();
+DigitalCamera camera = new DigitalCamera();
+
+//　音楽プレイヤーもスマートフォンも音楽プレイヤーの使い方は共通
+IMusicPlayer mp;
+mp = (IMusicPlayer)audio;
+mp.Play();
+mp = (IMusicPlayer)phone;
+mp.Play();
+//　デジタルカメラでもスマートフォンもカメラの使い方は共通
+ICamera cm;
+cm = (ICamera)phone;
+cm.Photo();
+cm = (ICamera)camera;
+cm.Photo();
+
+■演習:継承を用いたRPGの作成
+
+public class Monster : GameChar
+{
+    public Monster(int hp) : base(hp)
+    {
+    }
+    public override void Attack(int damage)
+    {
+        base.Attack(damage);
+        if (hp == 0)
+        {
+            Console.WriteLine("==ゴールドをゲット！==");
+        }
+    }
+}
+
+Console.WriteLine("RPGゲーム");
+Monster c = new Monster(10);
+c.ShowHP();
+Random r = new Random();
+while (c.HP != 0)
+{
+    int attack = r.Next(1, 10);
+    c.Attack(attack); //  敵の攻撃
+    Console.WriteLine("モンスターが{0}のダメージを受ける", attack);
+    c.ShowHP();
+}
+Console.WriteLine("**敵を撃破!!**");
